@@ -1,12 +1,13 @@
-emulate -L zsh
+setopt promptsubst
 
-local senv_problem varname provider out
-typeset -aU senv_problem
-
-# Setting defaults unless overridden
-[[ -z $senv_keys ]] && {
-  typeset -A senv_keys
-  senv_keys=(
+senv() {
+  local that code leak reveals keys disclosure
+  # Report the availability of exported environnment
+  # variables of a sensitive nature in your prompt.
+  # https://github.com/joepvd/senv
+  typeset -aU reveals disclosure # Only report once
+  typeset -A keys code
+  keys=(
     AWS_ACCESS_KEY_ID     aws
     AWS_SECRET_ACCESS_KEY aws
     DNSIMPLE_TOKEN        dnsimple
@@ -18,24 +19,16 @@ typeset -aU senv_problem
     SLACK_WEBHOOK         slack
     TRAVIS_TOKEN          travis
   )
-}
-[[ -z $senv_display ]] && {
-  typeset -A senv_display
-  senv_display=(
-    aws        
+  code=(
+    aws        ⓐ
     github     
     psql       🐘
-    slack      
+    slack      ⋕
     travis     👷
   )
+  for leak that in ${(kv)keys}
+    [[ ${(Pt)leak} =~ export ]] && reveals+=$that
+  for leak in $reveals
+    disclosure+="${code[$leak]-$leak}"
+  [[ -z $disclosure ]] || print -n "${(j: :)disclosure} "
 }
-
-for varname provider in ${(kv)senv_keys}
-  [[ ${(Pt)varname} =~ export ]] && senv_problem+=$provider
-for provider in $senv_problem
-  out+=$(
-    [[ $+senv_display[$provider] ]] \
-      && print -n $senv_display[$provider] \
-      || print -n $provider
-  )
-print -n $out
