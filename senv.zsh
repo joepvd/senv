@@ -10,21 +10,30 @@ senv() {
   keys=(
     AWS_ACCESS_KEY_ID     aws
     AWS_SECRET_ACCESS_KEY aws
+    DATABASE_URL          db
+    DB                    db
+    DB_SERVER             db
     DNSIMPLE_TOKEN        dnsimple
     GH_TOKEN              github
     GITHUB_TOKEN          github
     HEROKU_API_KEY        heroku
+    MYSQL_URL             mysql
+    MYSQL_PASSWORD        mysql
     PG_DATABASE           psql
     PG_PASSWORD           psql
+    REDIS_URL             redis
     SLACK_WEBHOOK         slack
     TRAVIS_TOKEN          travis
   )
   code=(
-    aws        ⓐ
-    github     
-    psql       🐘
-    slack      ⋕
-    travis     👷
+    aws       ⓐ
+    db       	⛁
+    github    
+    mysql    	🐬
+    psql      🐘
+    redis    	⌬
+    slack     ⋕
+    travis    👷
   )
   for leak that in ${(kv)keys}
     [[ ${(Pt)leak} =~ export ]] && reveals+=$that

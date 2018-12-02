@@ -13,7 +13,7 @@ You need to make functions available to the prompt. You can do that by
 ensuring `set promptsubst` is executed.
 
 Now possibly comes the tricky part: Locate where your prompt variable gets
-defined. Drop the followinng tactically in the `PROMPT` or `PS1` variable:
+defined. Drop the following tactically in the `PROMPT` or `PS1` variable:
 
 ```
 $(senv)
