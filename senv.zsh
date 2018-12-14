@@ -29,6 +29,7 @@ senv() {
     aws       ⓐ
     db       	⛁
     github    
+    heroku    ⓗ
     mysql    	🐬
     psql      🐘
     redis    	⌬
