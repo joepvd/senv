@@ -13,10 +13,11 @@ senv() {
     DATABASE_URL          db
     DB                    db
     DB_SERVER             db
-    DNSIMPLE_TOKEN        dnsimple
     GH_TOKEN              github
     GITHUB_TOKEN          github
     HEROKU_API_KEY        heroku
+    JIRA_TOKEN            jira
+    JIRA_API_TOKEN        jira
     MYSQL_URL             mysql
     MYSQL_PASSWORD        mysql
     PG_DATABASE           psql
@@ -26,15 +27,16 @@ senv() {
     TRAVIS_TOKEN          travis
   )
   code=(
-    aws       ⓐ
+    aws       
     db       	⛁
     github    
     heroku    ⓗ
     mysql    	🐬
     psql      🐘
     redis    	⌬
-    slack     ⋕
+    slack     
     travis    👷
+    jira      
   )
   for leak that in ${(kv)keys}
     [[ ${(Pt)leak} =~ export ]] && reveals+=$that
